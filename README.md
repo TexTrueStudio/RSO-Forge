@@ -1,13 +1,15 @@
 <p align="center">
  <img width="100px" src="src/main/resources/icon.png" align="center" alt="Reese's Sodium Options-Forge port(Unofficial) Logo" />
  <h2 align="center">Reese's Sodium Options-Forge port (Unofficial)</h2>
- <p align="center">Reese's Edition of Sodium Options</p>
+ <p align="center">Reese's Sodium Options Forge Unofficial port</p>
  <p align="center">
     <a title="Java 17" target="_blank"><img src="https://img.shields.io/badge/language-Java%2017-9B599A.svg?style=flat-square"></a>
     <a title="Mod License" target="_blank" href="https://github.com/TexTrueStudio/ReesesSodiumOptions-Forge/blob/5c274e9eb3abba19112f4da8faf66ef18a07bb2e/LICENSE"><img src="https://img.shields.io/github/license/FlashyReese/reeses-sodium-options?style=flat-square"></a>
     <a title="Environment: Client" target="_blank"><img src="https://img.shields.io/badge/environment-client-1976d2?style=flat-square"></a>
     <a title="Mod loader: Forge" target="_blank"><img src="https://img.shields.io/badge/Modloader-Forge-blue?style=flat-square"></a>
 </p>
+
+English / [简体中文](README-zh_cn.md)
 
 ## Building from source
 
