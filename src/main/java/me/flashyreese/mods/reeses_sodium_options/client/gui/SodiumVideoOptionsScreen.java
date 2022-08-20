@@ -17,6 +17,7 @@ import net.irisshaders.iris.api.v0.IrisApi;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -70,11 +71,11 @@ public class SodiumVideoOptionsScreen extends Screen {
         Dim2i donateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 122, tabFrameDim.getOriginY() - 26, 100, 20);
         Dim2i hideDonateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 20, tabFrameDim.getOriginY() - 26, 20, 20);
 
-        this.undoButton = new FlatButtonWidget(undoButtonDim, "Undo", this::undoChanges);
-        this.applyButton = new FlatButtonWidget(applyButtonDim, "Apply", this::applyChanges);
-        this.closeButton = new FlatButtonWidget(closeButtonDim, "Close", this::onClose);
+        this.undoButton = new FlatButtonWidget(undoButtonDim, I18n.translate("sodium.options.buttons.undo"), this::undoChanges);
+        this.applyButton = new FlatButtonWidget(applyButtonDim, I18n.translate("sodium.options.buttons.apply"), this::applyChanges);
+        this.closeButton = new FlatButtonWidget(closeButtonDim, I18n.translate("gui.done"), this::onClose);
 
-        this.donateButton = new FlatButtonWidget(donateButtonDim, "Buy us a coffee!", this::openDonationPage);
+        this.donateButton = new FlatButtonWidget(donateButtonDim, I18n.translate("sodium.options.buttons.donate"), this::openDonationPage);
         this.hideDonateButton = new FlatButtonWidget(hideDonateButtonDim, "x", this::hideDonationButton);
 
         if (SodiumClientMod.options().notifications.hideDonationButton) {
@@ -83,7 +84,7 @@ public class SodiumVideoOptionsScreen extends Screen {
 
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
-        if (FabricLoader.getInstance().isModLoaded("iris")) {
+        if (FabricLoader.getInstance().isModLoaded("oculus")) {
             int size = this.client.textRenderer.getWidth(new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()));
             Dim2i shaderPackButtonDim;
             if (!SodiumClientMod.options().notifications.hideDonationButton) {
