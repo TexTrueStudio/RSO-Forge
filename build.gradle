@@ -31,7 +31,7 @@ repositories {
     loom {
         forge {
             mixinConfigs = [
-                    "reeses-sodium-options.mixins.json"
+                    "reeses_sodium_options.mixins.json"
             ]
         }
     }
