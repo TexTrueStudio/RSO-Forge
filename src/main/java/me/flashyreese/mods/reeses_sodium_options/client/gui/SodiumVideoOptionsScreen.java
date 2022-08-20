@@ -83,7 +83,7 @@ public class SodiumVideoOptionsScreen extends Screen {
 
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
-        if (FabricLoader.getInstance().isModLoaded("iris")) {
+        if (FabricLoader.getInstance().isModLoaded("oculus")) {
             int size = this.client.textRenderer.getWidth(new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()));
             Dim2i shaderPackButtonDim;
             if (!SodiumClientMod.options().notifications.hideDonationButton) {
