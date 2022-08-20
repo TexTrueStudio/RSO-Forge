@@ -3,7 +3,7 @@ loaderVersion="[39,)"
 license="MIT"
 
 [[mods]]
-modId="reeses-sodium-options"
+modId="reeses_sodium_options"
 version="${version}"
 displayName="Reese's Sodium Options-Forge"
 logoFile="icon.png"
