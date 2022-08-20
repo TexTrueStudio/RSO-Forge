@@ -7,7 +7,6 @@
     <a title="Mod License" target="_blank" href="https://github.com/TexTrueStudio/ReesesSodiumOptions-Forge/blob/5c274e9eb3abba19112f4da8faf66ef18a07bb2e/LICENSE"><img src="https://img.shields.io/github/license/FlashyReese/reeses-sodium-options?style=flat-square"></a>
     <a title="Environment: Client" target="_blank"><img src="https://img.shields.io/badge/environment-client-1976d2?style=flat-square"></a>
     <a title="Mod loader: Forge" target="_blank"><img src="https://img.shields.io/badge/Modloader-Forge-blue?style=flat-square"></a>
-    <a title="Minecraft Version" target="_blank"><img src="https://img.shields.io/github/v/tag/FlashyReese/reeses-sodium-options?label=version&style=flat-square"></a>
  </p>
 
 ## Building from source

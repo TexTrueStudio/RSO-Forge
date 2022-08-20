@@ -19,5 +19,5 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: build-artifacts
+          name: RSO-Forge_AutoBuild
           path: build/libs
