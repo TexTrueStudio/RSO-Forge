@@ -1,23 +1,38 @@
 plugins {
     id 'org.ajoberstar.grgit' version '5.0.0'
-    id 'fabric-loom' version '0.12-SNAPSHOT'
+    //id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'maven-publish'
     id 'signing'
+    id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
-version = "${project.mod_version}+mc${project.minecraft_version}-${getVersionMetadata()}"
+version = "${project.mod_version}-mc${project.minecraft_version}"
 group = project.maven_group
 
 repositories {
+    //maven {
+    //    name = "Modrinth"
+    //    url = "https://api.modrinth.com/maven"
+    //    content {
+    //        includeGroup "maven.modrinth"
+    //    }
+    //}
     maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
+        name = "Curse Maven"
+        url = "https://cursemaven.com"
         content {
-            includeGroup "maven.modrinth"
+            includeGroup "curse.maven"
+        }
+    }
+    loom {
+        forge {
+            mixinConfigs = [
+                    "reeses-sodium-options.mixins.json"
+            ]
         }
     }
 }
@@ -26,20 +41,24 @@ dependencies {
     //to change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "maven.modrinth:sodium:${project.sodium_version}"
+    //modImplementation "maven.modrinth:sodium:${project.sodium_version}"
+    modImplementation "curse.maven:rubidium-${rubidium_curseforge_id}:${rubidium_curseforge_file_id}"
     implementation "org.joml:joml:1.10.2"
-    modImplementation "maven.modrinth:iris:${project.iris_version}"
+    //modImplementation "maven.modrinth:iris:${project.iris_version}"
+    modImplementation "curse.maven:oculus-${oculus_curseforge_id}:${oculus_curseforge_file_id}"
 
-    modRuntimeOnly "maven.modrinth:lazydfu:0.1.2"
+    //modRuntimeOnly "maven.modrinth:lazydfu:0.1.2"
 }
 
 processResources {
     inputs.property "version", project.version
 
-    filesMatching("fabric.mod.json") {
+    //filesMatching("fabric.mod.json") {
+    filesMatching("META-INF/mods.toml") {
         expand "version": project.version
     }
 }
@@ -56,7 +75,7 @@ java {
 }
 
 jar {
-    from "LICENSE.txt"
+    from "LICENSE"
 }
 
 
@@ -71,25 +90,25 @@ publishing {
     // select the repositories you want to publish to
     repositories {
         // uncomment to publish to the local maven
-        maven {
-            name = "FlashyReeseReleases"
-            url = "https://maven.flashyreese.me/releases"
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
-        maven {
-            name = "FlashyReeseSnapshots"
-            url = "https://maven.flashyreese.me/snapshots"
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
+        //maven {
+        //    name = "FlashyReeseReleases"
+        //    url = "https://maven.flashyreese.me/releases"
+        //    credentials {
+        //        username = System.getenv("MAVEN_USERNAME")
+        //        password = System.getenv("MAVEN_PASSWORD")
+        //    }
+        //}
+        //maven {
+        //    name = "FlashyReeseSnapshots"
+        //    url = "https://maven.flashyreese.me/snapshots"
+        //    credentials {
+        //        username = System.getenv("MAVEN_USERNAME")
+        //        password = System.getenv("MAVEN_PASSWORD")
+        //    }
+        //}
     }
 }
-
+/*
 def getVersionMetadata() {
     def build_id = System.getenv("GITHUB_RUN_NUMBER")
 
@@ -113,3 +132,5 @@ def getVersionMetadata() {
     // No tracking information could be found about the build
     return "unknown"
 }
+
+ */
