@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT"
+
+[[mods]]
+modId="reeses-sodium-options"
+version="${version}"
+displayName="Reese's Sodium Options-Forge"
+logoFile="icon.png"
+description='''
+Replaces Sodium-ForgePort's Options Screen
+'''
+credits="FlashyReese,TexTrue"
+authors="TexTrueStudio"
