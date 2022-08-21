@@ -3,7 +3,7 @@ plugins {
     //id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'maven-publish'
     id 'signing'
-    id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
+    id 'dev.architectury.loom' version '0.11.0-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -12,6 +12,14 @@ targetCompatibility = JavaVersion.VERSION_17
 archivesBaseName = project.archives_base_name
 version = "${project.mod_version}-mc${project.minecraft_version}"
 group = project.maven_group
+
+loom {
+    forge {
+        mixinConfigs = [
+                "reeses_sodium_options.mixins.json"
+        ]
+    }
+}
 
 repositories {
     //maven {
@@ -36,13 +44,6 @@ repositories {
     maven {
         url "https://maven.flashyreese.me/snapshots"
     }
-    loom {
-        forge {
-            mixinConfigs = [
-                    "reeses_sodium_options.mixins.json"
-            ]
-        }
-    }
 }
 
 dependencies {
@@ -50,7 +51,7 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    //modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     //modImplementation "me.jellysquid.mods:sodium-fabric:${project.sodium_version}"
@@ -83,6 +84,10 @@ java {
 
 jar {
     from "LICENSE"
+    manifest.attributes([
+            "Implementation-Title"  : project.archivesBaseName,
+            "Implementation-Version": project.version
+    ])
 }
 
 // configure the maven publication
@@ -96,47 +101,5 @@ publishing {
     // select the repositories you want to publish to
     repositories {
         // uncomment to publish to the local maven
-        //maven {
-        //    name = "FlashyReeseReleases"
-        //    url = "https://maven.flashyreese.me/releases"
-        //    credentials {
-        //        username = System.getenv("MAVEN_USERNAME")
-        //        password = System.getenv("MAVEN_PASSWORD")
-        //    }
-        //}
-        //maven {
-        //    name = "FlashyReeseSnapshots"
-        //    url = "https://maven.flashyreese.me/snapshots"
-        //    credentials {
-        //        username = System.getenv("MAVEN_USERNAME")
-        //        password = System.getenv("MAVEN_PASSWORD")
-        //    }
-        //}
     }
 }
-/*
-def getVersionMetadata() {
-    def build_id = System.getenv("GITHUB_RUN_NUMBER")
-
-    // CI builds only
-    if (build_id != null) {
-        return "build.${build_id}"
-    }
-
-    if (grgit != null) {
-        def head = grgit.head()
-        def id = head.abbreviatedId
-
-        // Flag the build if the build tree is not clean
-        if (!grgit.status().clean) {
-            id += "-dirty"
-        }
-
-        return "rev.${id}"
-    }
-
-    // No tracking information could be found about the build
-    return "unknown"
-}
-
- */

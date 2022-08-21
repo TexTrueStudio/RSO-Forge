@@ -12,7 +12,7 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-import net.fabricmc.loader.api.FabricLoader;
+//import net.fabricmc.loader.api.FabricLoader;
 import net.irisshaders.iris.api.v0.IrisApi;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -29,6 +29,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
+
+import static me.flashyreese.mods.reeses_sodium_options.client.ReesesSodiumOptionsClientMod.oculusLoaded;
 
 public class SodiumVideoOptionsScreen extends Screen {
 
@@ -81,7 +83,7 @@ public class SodiumVideoOptionsScreen extends Screen {
 
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
-        if (FabricLoader.getInstance().isModLoaded("iris")) {
+        if (oculusLoaded) {
             int size = this.client.textRenderer.getWidth(Text.translatable(IrisApi.getInstance().getMainScreenLanguageKey()));
             Dim2i shaderPackButtonDim;
             if (!SodiumClientMod.options().notifications.hideDonationButton) {
