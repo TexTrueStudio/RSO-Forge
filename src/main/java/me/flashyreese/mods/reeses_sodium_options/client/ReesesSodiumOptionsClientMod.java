@@ -19,7 +19,7 @@ public class ReesesSodiumOptionsClientMod {
 
     private static String MOD_VERSION;
 
-    public static final String MODID = "reeses_sodium_options";
+    public static final String MODID = "reeses-sodium-options";
 
     public static boolean rubidiumLoaded;
     public static boolean oculusLoaded;

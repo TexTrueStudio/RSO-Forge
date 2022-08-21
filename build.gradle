@@ -16,7 +16,7 @@ group = project.maven_group
 loom {
     forge {
         mixinConfigs = [
-                "reeses_sodium_options.mixins.json"
+                "reeses-sodium-options.mixins.json"
         ]
     }
 }
