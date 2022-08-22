@@ -1,6 +1,6 @@
 <p align="center">
- <img width="100px" src="src/main/resources/icon.png" align="center" alt="Reese's Sodium Options-Forge port(Unofficial) Logo" />
- <h2 align="center">Reese's Sodium Options-Forge port (Unofficial)</h2>
+ <img width="100px" src="modicon/icon.png" align="center" alt="TexTrue's Rubidium Options Logo" />
+ <h2 align="center">TexTrue's Rubidium Options</h2>
  <p align="center">Reese's Sodium Options Forge Unofficial port</p>
  <p align="center">
     <a title="Java 8" target="_blank"><img src="https://img.shields.io/badge/language-Java%208-9b599a.svg?style=flat-square"></a>
