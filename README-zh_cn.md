@@ -1,7 +1,7 @@
 <p align="center">
- <img width="100px" src="src/main/resources/icon.png" align="center" alt="Reese's Sodium Options-Forge port(Unofficial) Logo" />
- <h2 align="center">Reese's Sodium Options-Forge port (Unofficial)</h2>
- <p align="center">Reese 的 Sodium Options Forge非官方移植</p>
+ <img width="100px" src="modicon/icon.png" align="center" alt="TexTrue's Rubidium Options Logo" />
+ <h2 align="center">TexTrue's Rubidium Options</h2>
+ <p align="center">Reese's Sodium Options 非官方Forge移植</p>
  <p align="center">
     <a title="Java 17" target="_blank"><img src="https://img.shields.io/badge/language-Java%2017-9B599A.svg?style=flat-square"></a>
     <a title="Mod 许可证" target="_blank" href="https://github.com/TexTrueStudio/ReesesSodiumOptions-Forge/blob/5c274e9eb3abba19112f4da8faf66ef18a07bb2e/LICENSE"><img src="https://img.shields.io/github/license/FlashyReese/reeses-sodium-options?style=flat-square"></a>

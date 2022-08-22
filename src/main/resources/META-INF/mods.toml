@@ -5,7 +5,7 @@ license="MIT"
 [[mods]]
 modId="reeses_sodium_options"
 version="${version}"
-displayName="Reese's Sodium Options-Forge"
+displayName="TexTrue's Rubidium Options"
 logoFile="icon.png"
 description='''
 Replaces Sodium-ForgePort's Options Screen
