@@ -11,6 +11,10 @@
 
 English / [简体中文](README-zh_cn.md)
 
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/textrues-rubidium-options)
+
+[Modrinth](https://modrinth.com/mod/textrues-rubidium-options)
+
 ## Building from source
 
 #### Prerequisites

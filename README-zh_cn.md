@@ -11,6 +11,11 @@
 
 [English](README.md) / 简体中文
 
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/textrues-rubidium-options)
+
+[Modrinth](https://modrinth.com/mod/textrues-rubidium-options)
+
+
 ### 从源代码中构建
 
 #### 先决条件
