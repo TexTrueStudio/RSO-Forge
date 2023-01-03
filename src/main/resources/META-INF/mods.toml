@@ -33,4 +33,4 @@ modId = "rubidium"
 mandatory = true
 versionRange = "[0.5,)"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
