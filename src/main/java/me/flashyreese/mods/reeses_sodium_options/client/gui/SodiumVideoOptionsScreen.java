@@ -12,7 +12,6 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-//import net.fabricmc.loader.api.FabricLoader;
 import net.irisshaders.iris.api.v0.IrisApi;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import static me.flashyreese.mods.reeses_sodium_options.client.ReesesSodiumOptionsClientMod.oculusLoaded;
+import static me.flashyreese.mods.reeses_sodium_options.ReesesSodiumOptions.oculusLoaded;
 
 public class SodiumVideoOptionsScreen extends Screen {
 
@@ -63,8 +62,14 @@ public class SodiumVideoOptionsScreen extends Screen {
     protected BasicFrame.Builder parentFrameBuilder() {
         BasicFrame.Builder basicFrameBuilder;
 
-        Dim2i basicFrameDim = new Dim2i(0, 0, this.width, this.height);
-        Dim2i tabFrameDim = new Dim2i(basicFrameDim.getWidth() / 20 / 2, basicFrameDim.getHeight() / 4 / 2, basicFrameDim.getWidth() - (basicFrameDim.getWidth() / 20), basicFrameDim.getHeight() / 4 * 3);
+        // Calculates if resolution exceeds 16:9 ratio, force 16:9
+        int newWidth = this.width;
+        if ((float) this.width / (float) this.height > 1.77777777778) {
+            newWidth = (int) (this.height * 1.77777777778);
+        }
+
+        Dim2i basicFrameDim = new Dim2i((this.width - newWidth) / 2, 0, newWidth, this.height);
+        Dim2i tabFrameDim = new Dim2i(basicFrameDim.getOriginX() + basicFrameDim.getWidth() / 20 / 2, basicFrameDim.getOriginY() + basicFrameDim.getHeight() / 4 / 2, basicFrameDim.getWidth() - (basicFrameDim.getWidth() / 20), basicFrameDim.getHeight() / 4 * 3);
 
         Dim2i undoButtonDim = new Dim2i(tabFrameDim.getLimitX() - 203, tabFrameDim.getLimitY() + 5, 65, 20);
         Dim2i applyButtonDim = new Dim2i(tabFrameDim.getLimitX() - 134, tabFrameDim.getLimitY() + 5, 65, 20);

@@ -1,13 +1,10 @@
 plugins {
     id 'org.ajoberstar.grgit' version '5.0.0'
-    //id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'dev.architectury.loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
-    id 'signing'
-    id 'dev.architectury.loom' version '0.11.0-SNAPSHOT'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
 version = "${project.mod_version}-mc${project.minecraft_version}"
@@ -23,25 +20,19 @@ loom {
 
 repositories {
     maven {
-        name = "Curse Maven"
-        url = "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
     }
 }
 
 dependencies {
-    //to change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    //modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    forge "net.minecraftforge:forge:${project.forge_version}"
 
-    modImplementation "curse.maven:rubidium-${rubidium_curseforge_id}:${rubidium_curseforge_file_id}"
+    modImplementation "maven.modrinth:rubidium:${project.rubidium_version}"
+    modImplementation "maven.modrinth:oculus:${project.oculus_version}"
     implementation "org.joml:joml:1.10.2"
-    modImplementation "curse.maven:oculus-${oculus_curseforge_id}:${oculus_curseforge_file_id}"
 }
 
 processResources {
