@@ -13,7 +13,6 @@ description='''
 Replaces Sodium-ForgePort's Options Screen
 '''
 
-
 [[dependencies.reeses_sodium_options]]
 modId = "forge"
 mandatory = true
