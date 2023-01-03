@@ -7,8 +7,30 @@ modId="reeses_sodium_options"
 version="${version}"
 displayName="TexTrue's Rubidium Options"
 logoFile= "icon.png"
+credits="FlashyReese"
+authors="TexTrue, TexTrueStudio"
 description='''
 Replaces Sodium-ForgePort's Options Screen
 '''
-credits="FlashyReese,TexTrue"
-authors="TexTrueStudio"
+
+
+[[dependencies.reeses_sodium_options]]
+modId = "forge"
+mandatory = true
+versionRange = "[43,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.reeses_sodium_options]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.reeses_sodium_options]]
+modId = "rubidium"
+mandatory = true
+versionRange = "[0.5,)"
+ordering = "NONE"
+side = "BOTH"
