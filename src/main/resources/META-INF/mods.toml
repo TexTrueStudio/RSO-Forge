@@ -10,7 +10,7 @@ logoFile= "icon.png"
 credits="FlashyReese"
 authors="TexTrue, TexTrueStudio"
 description='''
-Replaces Sodium-ForgePort's Options Screen
+Replaces Rubidium Options Screen
 '''
 
 
@@ -24,7 +24,7 @@ side = "BOTH"
 [[dependencies.reeses_sodium_options]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.3,]"
+versionRange = "[1.19.3,)"
 ordering = "NONE"
 side = "BOTH"
 
