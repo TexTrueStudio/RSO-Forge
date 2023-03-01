@@ -33,5 +33,5 @@ artifacts in `build/libs`.
 
 ## License
 
-Reese's Sodium Options is license under MIT, a free and open-source license. For more information, please see the
+TexTrue's Rubidium Options is license under MIT, a free and open-source license. For more information, please see the
 [license file](LICENSE).

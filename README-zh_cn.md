@@ -31,4 +31,4 @@ ZH-CN / [EN-US](README.md)
 
 ## 许可证
 
-Reese's Sodium Options 使用 MIT 许可证，这是一个免费的开源许可证。有关详细信息，请参阅[许可文件](LICENSE)。
+TexTrue's Rubidium Options 使用 MIT 许可证，这是一个免费的开源许可证。有关详细信息，请参阅[许可文件](LICENSE)。
