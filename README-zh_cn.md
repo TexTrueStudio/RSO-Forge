@@ -1,20 +1,20 @@
-<p align="center">
- <img width="100px" src="modicon/icon.png" align="center" alt="TexTrue's Rubidium Options Logo" />
- <h2 align="center">TexTrue's Rubidium Options</h2>
- <p align="center">Reese's Sodium Options 非官方Forge移植</p>
- <p align="center">
-    <a title="Java 17" target="_blank"><img src="https://img.shields.io/badge/language-Java%2017-9B599A.svg?style=flat-square"></a>
-    <a title="Mod 许可证" target="_blank" href="https://github.com/TexTrueStudio/ReesesSodiumOptions-Forge/blob/5c274e9eb3abba19112f4da8faf66ef18a07bb2e/LICENSE"><img src="https://img.shields.io/github/license/FlashyReese/reeses-sodium-options?style=flat-square"></a>
-    <a title="环境: 客户端" target="_blank"><img src="https://img.shields.io/badge/environment-client-1976d2?style=flat-square"></a>
-    <a title="Mod加载器: Forge" target="_blank"><img src="https://img.shields.io/badge/Modloader-Forge-blue?style=flat-square"></a>
-</p>
+<center><div align="center">
 
-[English](README.md) / 简体中文
+<img height="100" src="icon/icon.png" width="100"/>
+
+# TexTrue's Rubidium Options
+
+![Enviroment](https://img.shields.io/badge/Enviroment-Client-purple)
+
+
+Reese's Sodium Options 非官方 Forge 移植版。
+
+ZH-CN / [EN-US](README.md)
 
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/textrues-rubidium-options)
-
 [Modrinth](https://modrinth.com/mod/textrues-rubidium-options)
 
+</div></center>
 
 ### 从源代码中构建
 
