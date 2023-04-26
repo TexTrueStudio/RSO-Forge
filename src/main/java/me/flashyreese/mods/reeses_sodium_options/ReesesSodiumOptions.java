@@ -20,26 +20,13 @@ public class ReesesSodiumOptions {
     public static boolean rubidiumLoaded;
     public static boolean oculusLoaded;
 
-
     public ReesesSodiumOptions() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onInitializeClient);
-
         ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
-
     }
 
     public void onInitializeClient(final FMLClientSetupEvent event) {
-
         oculusLoaded = ModList.get().isLoaded("oculus");
         rubidiumLoaded = ModList.get().isLoaded("rubidium");
-
-    }
-
-    public static Logger logger() {
-        if (LOGGER == null) {
-            LOGGER = LogManager.getLogger("TexTrue's Sodium Options");
-        }
-
-        return LOGGER;
     }
 }
