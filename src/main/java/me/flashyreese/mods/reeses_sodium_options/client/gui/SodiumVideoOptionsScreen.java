@@ -74,15 +74,15 @@ public class SodiumVideoOptionsScreen extends Screen {
         Dim2i applyButtonDim = new Dim2i(tabFrameDim.getLimitX() - 134, tabFrameDim.getLimitY() + 5, 65, 20);
         Dim2i closeButtonDim = new Dim2i(tabFrameDim.getLimitX() - 65, tabFrameDim.getLimitY() + 5, 65, 20);
 
-        String donationText = String.valueOf(new TranslatableText("sodium.options.buttons.donate"));
+        String donationText = I18n.translate("sodium.options.buttons.donate");
         int donationTextWidth = this.client.textRenderer.getWidth(donationText);
 
         Dim2i donateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 32 - donationTextWidth, tabFrameDim.getLimitY() - 26, 10 + donationTextWidth, 20);
         Dim2i hideDonateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 20, tabFrameDim.getLimitY() - 26, 20, 20);
 
-        this.undoButton = new FlatButtonWidget(undoButtonDim, String.valueOf(new TranslatableText("sodium.options.buttons.undo")), this::undoChanges);
-        this.applyButton = new FlatButtonWidget(applyButtonDim, String.valueOf(new TranslatableText("sodium.options.buttons.apply")), this::applyChanges);
-        this.closeButton = new FlatButtonWidget(closeButtonDim, String.valueOf(new TranslatableText("gui.done")), this::onClose);
+        this.undoButton = new FlatButtonWidget(undoButtonDim, I18n.translate("sodium.options.buttons.undo"), this::undoChanges);
+        this.applyButton = new FlatButtonWidget(applyButtonDim, I18n.translate("sodium.options.buttons.apply"), this::applyChanges);
+        this.closeButton = new FlatButtonWidget(closeButtonDim, I18n.translate("gui.done"), this::onClose);
 
         this.donateButton = new FlatButtonWidget(donateButtonDim, donationText, this::openDonationPage);
         this.hideDonateButton = new FlatButtonWidget(hideDonateButtonDim, "x", this::hideDonationButton);
