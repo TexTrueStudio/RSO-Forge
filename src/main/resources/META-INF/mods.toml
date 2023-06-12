@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[46,)"
+license="MIT"
+
+[[mods]]
+modId="reeses_sodium_options"
+version="${version}"
+displayName="TexTrue's Rubidium Options"
+displayURL="https://github.com/ThinkingStudios/ReesesSodiumOptions-Forge"
+logoFile= "icon.png"
+credits="FlashyReese"
+authors="TexTrue, TexTrueStudio"
+description='''
+Replaces Rubidium Options Screen
+'''
+
+[[dependencies.reeses_sodium_options]]
+modId = "forge"
+mandatory = true
+versionRange = "[46,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.reeses_sodium_options]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.reeses_sodium_options]]
+modId = "rubidium"
+mandatory = true
+versionRange = "[0.6,)"
+ordering = "NONE"
+side = "CLIENT"

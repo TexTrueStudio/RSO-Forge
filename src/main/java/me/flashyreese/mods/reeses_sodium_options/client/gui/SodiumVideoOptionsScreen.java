@@ -13,7 +13,6 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -44,7 +43,7 @@ public class SodiumVideoOptionsScreen extends Screen {
     private boolean hasPendingChanges;
 
     public SodiumVideoOptionsScreen(Screen prev, List<OptionPage> pages) {
-        super(Text.literal("Reese's Sodium Menu"));
+        super(Text.literal("TexTrue's Rubidium Menu"));
         this.prevScreen = prev;
         this.pages.addAll(pages);
     }
