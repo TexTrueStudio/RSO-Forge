@@ -74,11 +74,11 @@ public class SodiumVideoOptionsScreen extends Screen {
         Dim2i applyButtonDim = new Dim2i(tabFrameDim.getLimitX() - 134, tabFrameDim.getLimitY() + 5, 65, 20);
         Dim2i closeButtonDim = new Dim2i(tabFrameDim.getLimitX() - 65, tabFrameDim.getLimitY() + 5, 65, 20);
 
-        String donationText = I18n.translate("sodium.options.buttons.donate");
+        String donationText = "Buy us a coffee!";
         int donationTextWidth = this.client.textRenderer.getWidth(donationText);
 
-        Dim2i donateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 32 - donationTextWidth, tabFrameDim.getLimitY() - 26, 10 + donationTextWidth, 20);
-        Dim2i hideDonateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 20, tabFrameDim.getLimitY() - 26, 20, 20);
+        Dim2i donateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 32 - donationTextWidth, tabFrameDim.getOriginY() - 26, 10 + donationTextWidth, 20);
+        Dim2i hideDonateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 20, tabFrameDim.getOriginY() - 26, 20, 20);
 
         this.undoButton = new FlatButtonWidget(undoButtonDim, I18n.translate("sodium.options.buttons.undo"), this::undoChanges);
         this.applyButton = new FlatButtonWidget(applyButtonDim, I18n.translate("sodium.options.buttons.apply"), this::applyChanges);
