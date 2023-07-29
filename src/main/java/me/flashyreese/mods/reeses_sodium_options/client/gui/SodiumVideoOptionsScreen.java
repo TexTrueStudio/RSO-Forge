@@ -43,7 +43,7 @@ public class SodiumVideoOptionsScreen extends Screen {
     private boolean hasPendingChanges;
 
     public SodiumVideoOptionsScreen(Screen prev, List<OptionPage> pages) {
-        super(Text.literal("TexTrue's Rubidium Menu"));
+        super(Text.literal("Reese's Sodium Menu"));
         this.prevScreen = prev;
         this.pages.addAll(pages);
     }
