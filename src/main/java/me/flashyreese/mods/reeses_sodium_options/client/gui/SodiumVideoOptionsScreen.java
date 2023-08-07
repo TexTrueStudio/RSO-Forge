@@ -1,6 +1,6 @@
 package me.flashyreese.mods.reeses_sodium_options.client.gui;
 
-import me.flashyreese.mods.reeses_sodium_options.client.gui.compat.IrisCompat;
+import me.flashyreese.mods.reeses_sodium_options.compat.IrisCompat;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.AbstractFrame;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.BasicFrame;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.components.SearchTextFieldComponent;

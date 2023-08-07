@@ -1,4 +1,4 @@
-package me.flashyreese.mods.reeses_sodium_options.client.gui.compat;
+package me.flashyreese.mods.reeses_sodium_options.compat;
 
 import net.minecraft.client.gui.screen.Screen;
 
