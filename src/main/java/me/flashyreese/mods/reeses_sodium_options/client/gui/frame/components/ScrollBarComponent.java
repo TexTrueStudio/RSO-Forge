@@ -8,6 +8,7 @@ import net.minecraft.util.math.MathHelper;
 import java.util.function.Consumer;
 
 public class ScrollBarComponent extends AbstractWidget {
+    protected static final int SCROLL_OFFSET = 6;
 
     protected final Dim2i dim;
 
@@ -104,7 +105,7 @@ public class ScrollBarComponent extends AbstractWidget {
     public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
         if (this.dim.containsCursor(mouseX, mouseY) || this.extendedScrollArea != null && this.extendedScrollArea.containsCursor(mouseX, mouseY)) {
             if (this.offset <= this.maxScrollBarOffset && this.offset >= 0) {
-                int value = (int) (this.offset - amount * 6);
+                int value = (int) (this.offset - amount * SCROLL_OFFSET);
                 this.setOffset(value);
                 return true;
             }

@@ -6,6 +6,7 @@ license="MIT"
 modId="reeses_sodium_options"
 version="${version}"
 displayName="TexTrue's Rubidium Options"
+displayURL="https://github.com/ThinkingStudios/ReesesSodiumOptions-Forge/"
 logoFile= "icon.png"
 credits="FlashyReese"
 authors="TexTrue, TexTrueStudio"
@@ -23,7 +24,7 @@ side = "BOTH"
 [[dependencies.reeses_sodium_options]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19,1.19.3)"
+versionRange = "[1.19,1.19.2)"
 ordering = "NONE"
 side = "BOTH"
 
