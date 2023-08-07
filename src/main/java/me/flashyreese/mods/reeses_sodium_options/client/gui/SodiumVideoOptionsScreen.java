@@ -1,10 +1,11 @@
 package me.flashyreese.mods.reeses_sodium_options.client.gui;
 
-import me.flashyreese.mods.reeses_sodium_options.ReesesSodiumOptions;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.AbstractFrame;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.BasicFrame;
+import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.components.SearchTextFieldComponent;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.tab.Tab;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.tab.TabFrame;
+import me.flashyreese.mods.reeses_sodium_options.compat.IrisCompat;
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.options.Option;
@@ -13,7 +14,6 @@ import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
 import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-import net.irisshaders.iris.api.v0.IrisApi;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
@@ -38,6 +38,9 @@ public class SodiumVideoOptionsScreen extends Screen {
     private static final AtomicReference<Integer> tabFrameScrollBarOffset = new AtomicReference<>(0);
     private static final AtomicReference<Integer> optionPageScrollBarOffset = new AtomicReference<>(0);
 
+    private static final AtomicReference<String> lastSearch = new AtomicReference<>("");
+    private static final AtomicReference<Integer> lastSearchIndex = new AtomicReference<>(0);
+
     private final Screen prevScreen;
     private final List<OptionPage> pages = new ArrayList<>();
     private AbstractFrame frame;
@@ -45,16 +48,31 @@ public class SodiumVideoOptionsScreen extends Screen {
     private FlatButtonWidget donateButton, hideDonateButton;
     private boolean hasPendingChanges;
 
+    private SearchTextFieldComponent searchTextField;
+
     public SodiumVideoOptionsScreen(Screen prev, List<OptionPage> pages) {
         super(new LiteralText("Reese's Sodium Menu"));
         this.prevScreen = prev;
         this.pages.addAll(pages);
     }
 
+    // Hackalicious! Rebuild UI
+    public void rebuildUI() {
+        this.clearChildren();
+        this.init();
+    }
+
     @Override
     protected void init() {
         this.frame = this.parentFrameBuilder().build();
         this.addDrawableChild(this.frame);
+
+        this.searchTextField.setFocused(!lastSearch.get().trim().isEmpty());
+        if (this.searchTextField.isFocused()) {
+            this.setFocused(this.searchTextField);
+        } else {
+            this.setFocused(this.frame);
+        }
     }
 
     protected BasicFrame.Builder parentFrameBuilder() {
@@ -90,18 +108,32 @@ public class SodiumVideoOptionsScreen extends Screen {
             this.setDonationButtonVisibility(false);
         }
 
+        Dim2i searchTextFieldDim;
+        if (SodiumClientMod.options().notifications.hideDonationButton) {
+            searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width(), 20);
+        } else {
+            searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width() - (tabFrameDim.getLimitX() - donateButtonDim.x()) - 2, 20);
+        }
+
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
-        if (ReesesSodiumOptions.oculusLoaded) {
-            int size = this.client.textRenderer.getWidth(new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()));
+        if (IrisCompat.isIrisPresent()) {
+            int size = this.client.textRenderer.getWidth(new TranslatableText(IrisCompat.getIrisShaderPacksScreenLanguageKey()));
             Dim2i shaderPackButtonDim;
             if (!SodiumClientMod.options().notifications.hideDonationButton) {
                 shaderPackButtonDim = new Dim2i(donateButtonDim.x() - 12 - size, tabFrameDim.y() - 26, 10 + size, 20);
             } else {
                 shaderPackButtonDim = new Dim2i(tabFrameDim.getLimitX() - size - 10, tabFrameDim.y() - 26, 10 + size, 20);
             }
-            FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()), () -> this.client.setScreen((Screen) IrisApi.getInstance().openMainIrisScreenObj(this)));
+            searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width() - (tabFrameDim.getLimitX() - shaderPackButtonDim.x()) - 2, 20);
+
+            FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, new TranslatableText(IrisCompat.getIrisShaderPacksScreenLanguageKey()), () -> this.client.setScreen(IrisCompat.getIrisShaderPacksScreen(this)));
             basicFrameBuilder.addChild(dim -> shaderPackButton);
+
+            this.searchTextField = new SearchTextFieldComponent(searchTextFieldDim, this.pages, tabFrameSelectedTab,
+                    tabFrameScrollBarOffset, optionPageScrollBarOffset, tabFrameDim.height(), this, lastSearch, lastSearchIndex);
+
+            basicFrameBuilder.addChild(dim -> this.searchTextField);
         }
 
         return basicFrameBuilder;
@@ -111,9 +143,7 @@ public class SodiumVideoOptionsScreen extends Screen {
         return BasicFrame.createBuilder()
                 .setDimension(parentBasicFrameDim)
                 .shouldRenderOutline(false)
-                .addChild(dim -> this.undoButton)
-                .addChild(dim -> this.applyButton)
-                .addChild(dim -> this.closeButton)
+
                 .addChild(dim -> this.donateButton)
                 .addChild(dim -> this.hideDonateButton)
                 .addChild(parentDim -> TabFrame.createBuilder()
@@ -121,19 +151,26 @@ public class SodiumVideoOptionsScreen extends Screen {
                         .shouldRenderOutline(false)
                         .setTabSectionScrollBarOffset(tabFrameScrollBarOffset)
                         .setTabSectionSelectedTab(tabFrameSelectedTab)
-                        .addTabs(tabs -> this.pages.stream().filter(page -> !page.getGroups().isEmpty()).forEach(page -> tabs.add(Tab.createBuilder().from(page, optionPageScrollBarOffset))))
+                        .addTabs(tabs -> this.pages
+                                .stream()
+                                .filter(page -> !page.getGroups().isEmpty())
+                                .forEach(page -> tabs.add(Tab.createBuilder().from(page, optionPageScrollBarOffset)))
+                        )
                         .onSetTab(() -> {
                             optionPageScrollBarOffset.set(0);
                         })
                         .build()
-                );
+                )
+                .addChild(dim -> this.undoButton)
+                .addChild(dim -> this.applyButton)
+                .addChild(dim -> this.closeButton);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        super.renderBackground(matrices);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float delta) {
+        super.renderBackground(matrixStack);
         this.updateControls();
-        this.frame.render(matrices, mouseX, mouseY, delta);
+        this.frame.render(matrixStack, mouseX, mouseY, delta);
     }
 
     private void updateControls() {
@@ -172,10 +209,7 @@ public class SodiumVideoOptionsScreen extends Screen {
 
         this.setDonationButtonVisibility(false);
 
-        // Hackalicious! Rebuild UI
-        this.remove(this.frame);
-        this.frame = this.parentFrameBuilder().build();
-        this.addDrawableChild(this.frame);
+        this.rebuildUI();
     }
 
     private void openDonationPage() {
@@ -226,7 +260,7 @@ public class SodiumVideoOptionsScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == GLFW.GLFW_KEY_P && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0) {
+        if (keyCode == GLFW.GLFW_KEY_P && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0 && !(this.searchTextField != null && this.searchTextField.isFocused())) {
             MinecraftClient.getInstance().setScreen(new VideoOptionsScreen(this.prevScreen, MinecraftClient.getInstance().options));
 
             return true;
@@ -242,6 +276,8 @@ public class SodiumVideoOptionsScreen extends Screen {
 
     @Override
     public void close() {
+        lastSearch.set("");
+        lastSearchIndex.set(0);
         this.client.setScreen(this.prevScreen);
     }
 }
