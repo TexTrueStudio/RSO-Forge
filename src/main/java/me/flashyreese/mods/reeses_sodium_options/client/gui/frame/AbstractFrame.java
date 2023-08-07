@@ -8,6 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.ParentElement;
+import net.minecraft.client.gui.ScreenRect;
 import net.minecraft.client.gui.navigation.GuiNavigation;
 import net.minecraft.client.gui.navigation.GuiNavigationPath;
 import net.minecraft.client.util.math.MatrixStack;
@@ -45,12 +46,12 @@ public abstract class AbstractFrame extends AbstractWidget implements ParentElem
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float delta) {
         if (this.renderOutline) {
             this.drawRectOutline(this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY(), 0xFFAAAAAA);
         }
         for (Drawable drawable : this.drawable) {
-            drawable.render(matrices, mouseX, mouseY, delta);
+            drawable.render(matrixStack, mouseX, mouseY, delta);
         }
     }
 
@@ -110,5 +111,10 @@ public abstract class AbstractFrame extends AbstractWidget implements ParentElem
     @Override
     public @Nullable GuiNavigationPath getNavigationPath(GuiNavigation navigation) {
         return ParentElement.super.getNavigationPath(navigation);
+    }
+
+    @Override
+    public ScreenRect getNavigationFocus() {
+        return new ScreenRect(this.dim.x(), this.dim.y(), this.dim.width(), this.dim.height());
     }
 }

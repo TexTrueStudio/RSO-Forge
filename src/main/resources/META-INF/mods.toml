@@ -6,13 +6,13 @@ license="MIT"
 modId="reeses_sodium_options"
 version="${version}"
 displayName="TexTrue's Rubidium Options"
+displayURL="https://github.com/ThinkingStudios/ReesesSodiumOptions-Forge"
 logoFile= "icon.png"
 credits="FlashyReese"
 authors="TexTrue, TexTrueStudio"
 description='''
 Replaces Rubidium Options Screen
 '''
-
 
 [[dependencies.reeses_sodium_options]]
 modId = "forge"
