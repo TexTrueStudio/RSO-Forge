@@ -23,12 +23,12 @@ public class TabFrame extends AbstractFrame {
     private final Dim2i frameSection;
     private final List<Tab<?>> tabs = new ArrayList<>();
     private final Runnable onSetTab;
-    private final AtomicReference<Text> tabSectionSelectedTab;
+    private final AtomicReference<String> tabSectionSelectedTab;
     private ScrollBarComponent tabSectionScrollBar = null;
     private Tab<?> selectedTab;
     private AbstractFrame selectedFrame;
 
-    public TabFrame(Dim2i dim, boolean renderOutline, List<Tab<?>> tabs, Runnable onSetTab, AtomicReference<Text> tabSectionSelectedTab, AtomicReference<Integer> tabSectionScrollBarOffset) {
+    public TabFrame(Dim2i dim, boolean renderOutline, List<Tab<?>> tabs, Runnable onSetTab, AtomicReference<String> tabSectionSelectedTab, AtomicReference<Integer> tabSectionScrollBarOffset) {
         super(dim, renderOutline);
         this.tabs.addAll(tabs);
         int tabSectionY = this.tabs.size() * 18;
@@ -50,10 +50,13 @@ public class TabFrame extends AbstractFrame {
         this.tabSectionSelectedTab = tabSectionSelectedTab;
 
         if (this.tabSectionSelectedTab.get() != null) {
-            this.selectedTab = this.tabs.stream().filter(tab -> tab.getTitle().getString().equals(this.tabSectionSelectedTab.get().getString())).findAny().get();
+            this.selectedTab = this.tabs.stream().filter(tab -> tab.getTitle().getString().equals(this.tabSectionSelectedTab.get())).findAny().get();
         }
 
         this.buildFrame();
+
+        // Let's build each frame, future note for anyone: do not move this line.
+        this.tabs.stream().filter(tab -> this.selectedTab != tab).forEach(tab -> tab.getFrameFunction().apply(this.frameSection));
     }
 
     public static Builder createBuilder() {
@@ -62,7 +65,7 @@ public class TabFrame extends AbstractFrame {
 
     public void setTab(Tab<?> tab) {
         this.selectedTab = tab;
-        this.tabSectionSelectedTab.set(this.selectedTab.getTitle());
+        this.tabSectionSelectedTab.set(this.selectedTab.getTitle().getString());
         if (this.onSetTab != null) {
             this.onSetTab.run();
         }
@@ -82,8 +85,8 @@ public class TabFrame extends AbstractFrame {
             }
         }
 
-        this.rebuildTabFrame();
         this.rebuildTabs();
+        this.rebuildTabFrame();
 
         if (this.tabSectionCanScroll) {
             this.tabSectionScrollBar.updateThumbPosition();
@@ -160,7 +163,7 @@ public class TabFrame extends AbstractFrame {
         private Dim2i dim;
         private boolean renderOutline;
         private Runnable onSetTab;
-        private AtomicReference<Text> tabSectionSelectedTab = new AtomicReference<>(null);
+        private AtomicReference<String> tabSectionSelectedTab = new AtomicReference<>(null);
         private AtomicReference<Integer> tabSectionScrollBarOffset = new AtomicReference<>(0);
 
         public Builder setDimension(Dim2i dim) {
@@ -183,7 +186,7 @@ public class TabFrame extends AbstractFrame {
             return this;
         }
 
-        public Builder setTabSectionSelectedTab(AtomicReference<Text> tabSectionSelectedTab) {
+        public Builder setTabSectionSelectedTab(AtomicReference<String> tabSectionSelectedTab) {
             this.tabSectionSelectedTab = tabSectionSelectedTab;
             return this;
         }
