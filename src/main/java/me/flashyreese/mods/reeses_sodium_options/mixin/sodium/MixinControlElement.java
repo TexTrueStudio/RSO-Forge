@@ -5,8 +5,6 @@ import me.jellysquid.mods.sodium.client.gui.options.Option;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlElement;
 import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
-import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
-import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;

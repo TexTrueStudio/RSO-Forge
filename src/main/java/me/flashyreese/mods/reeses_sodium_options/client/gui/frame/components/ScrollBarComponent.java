@@ -10,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import java.util.function.Consumer;
 
 public class ScrollBarComponent extends AbstractWidget {
+
     protected static final int SCROLL_OFFSET = 6;
 
     protected final Dim2i dim;
@@ -142,6 +143,11 @@ public class ScrollBarComponent extends AbstractWidget {
         });
     }
 
+    public void setOffsetFromCords(int x, int y) {
+        int offset = x * this.viewPortLength / this.frameLength;
+        this.setOffset(offset);
+    }
+
     @Override
     public ScreenRect getNavigationFocus() {
         return new ScreenRect(this.dim.x(), this.dim.y(), this.dim.width(), this.dim.height());
@@ -154,18 +160,18 @@ public class ScrollBarComponent extends AbstractWidget {
 
         if (this.mode == Mode.VERTICAL) {
             if (keyCode == InputUtil.GLFW_KEY_UP) {
-                this.setOffset(this.getOffset() - 6);
+                this.setOffset(this.getOffset() - SCROLL_OFFSET);
                 return true;
             } else if (keyCode == InputUtil.GLFW_KEY_DOWN) {
-                this.setOffset(this.getOffset() + 6);
+                this.setOffset(this.getOffset() + SCROLL_OFFSET);
                 return true;
             }
         } else {
             if (keyCode == InputUtil.GLFW_KEY_LEFT) {
-                this.setOffset(this.getOffset() - 6);
+                this.setOffset(this.getOffset() - SCROLL_OFFSET);
                 return true;
             } else if (keyCode == InputUtil.GLFW_KEY_RIGHT) {
-                this.setOffset(this.getOffset() + 6);
+                this.setOffset(this.getOffset() + SCROLL_OFFSET);
                 return true;
             }
         }
