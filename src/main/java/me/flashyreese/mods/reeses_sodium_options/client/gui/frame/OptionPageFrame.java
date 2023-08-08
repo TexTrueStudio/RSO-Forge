@@ -11,7 +11,6 @@ import me.jellysquid.mods.sodium.client.gui.options.control.ControlElement;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -154,13 +153,6 @@ public class OptionPageFrame extends AbstractFrame {
 
         drawContext.getMatrices().push();
         drawContext.getMatrices().translate(0, 0, 90);
-        //this.drawRect(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
-        drawContext.fill(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
-        //this.drawRectOutline(boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
-        drawContext.fill(boxX, boxY, boxX + boxWidth, boxY + 1, 0xFF94E4D3); // top
-        drawContext.fill(boxX, boxY + boxHeight - 1, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3); // bottom
-        drawContext.fill(boxX, boxY, boxX + 1, boxY + boxHeight, 0xFF94E4D3); // left
-        drawContext.fill(boxX + boxWidth - 1, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3); // right
         this.drawRect(drawContext, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
         this.drawBorder(drawContext, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
 

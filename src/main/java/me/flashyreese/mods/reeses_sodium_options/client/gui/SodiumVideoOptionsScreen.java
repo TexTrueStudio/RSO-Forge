@@ -59,7 +59,6 @@ public class SodiumVideoOptionsScreen extends Screen {
         this.clearAndInit();
     }
 
-
     @Override
     protected void init() {
         this.frame = this.parentFrameBuilder().build();
@@ -106,6 +105,7 @@ public class SodiumVideoOptionsScreen extends Screen {
             this.setDonationButtonVisibility(false);
         }
 
+
         Dim2i searchTextFieldDim;
         if (SodiumClientMod.options().notifications.hideDonationButton) {
             searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width(), 20);
@@ -113,10 +113,10 @@ public class SodiumVideoOptionsScreen extends Screen {
             searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width() - (tabFrameDim.getLimitX() - donateButtonDim.x()) - 2, 20);
         }
 
+
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
-        if (IrisCompat.isIrisPresent()) { // FabricLoader.getInstance().isModLoaded("iris")) {
-            //int size = this.client.textRenderer.getWidth(Text.translatable(IrisApi.getInstance().getMainScreenLanguageKey()));
+        if (IrisCompat.isIrisPresent()) {
             int size = this.client.textRenderer.getWidth(Text.translatable(IrisCompat.getIrisShaderPacksScreenLanguageKey()));
             Dim2i shaderPackButtonDim;
             if (!SodiumClientMod.options().notifications.hideDonationButton) {
@@ -128,12 +128,12 @@ public class SodiumVideoOptionsScreen extends Screen {
 
             FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, Text.translatable(IrisCompat.getIrisShaderPacksScreenLanguageKey()), () -> this.client.setScreen(IrisCompat.getIrisShaderPacksScreen(this)));
             basicFrameBuilder.addChild(dim -> shaderPackButton);
-
-            this.searchTextField = new SearchTextFieldComponent(searchTextFieldDim, this.pages, tabFrameSelectedTab,
-                    tabFrameScrollBarOffset, optionPageScrollBarOffset, tabFrameDim.height(), this, lastSearch, lastSearchIndex);
-
-            basicFrameBuilder.addChild(dim -> this.searchTextField);
         }
+
+        this.searchTextField = new SearchTextFieldComponent(searchTextFieldDim, this.pages, tabFrameSelectedTab,
+                tabFrameScrollBarOffset, optionPageScrollBarOffset, tabFrameDim.height(), this, lastSearch, lastSearchIndex);
+
+        basicFrameBuilder.addChild(dim -> this.searchTextField);
 
         return basicFrameBuilder;
     }
@@ -206,6 +206,7 @@ public class SodiumVideoOptionsScreen extends Screen {
         }
 
         this.setDonationButtonVisibility(false);
+
 
         this.rebuildUI();
     }
