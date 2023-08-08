@@ -1,11 +1,11 @@
 package me.flashyreese.mods.reeses_sodium_options.client.gui;
 
-import me.flashyreese.mods.reeses_sodium_options.compat.IrisCompat;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.AbstractFrame;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.BasicFrame;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.components.SearchTextFieldComponent;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.tab.Tab;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.tab.TabFrame;
+import me.flashyreese.mods.reeses_sodium_options.compat.IrisCompat;
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.options.Option;
@@ -93,7 +93,6 @@ public class SodiumVideoOptionsScreen extends Screen {
         int donationTextWidth = this.client.textRenderer.getWidth(donationText);
 
         Dim2i donateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 32 - donationTextWidth, tabFrameDim.y() - 26, 10 + donationTextWidth, 20);
-
         Dim2i hideDonateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 20, tabFrameDim.y() - 26, 20, 20);
 
         this.undoButton = new FlatButtonWidget(undoButtonDim, Text.translatable("sodium.options.buttons.undo"), this::undoChanges);
@@ -101,11 +100,12 @@ public class SodiumVideoOptionsScreen extends Screen {
         this.closeButton = new FlatButtonWidget(closeButtonDim, Text.translatable("gui.done"), this::close);
 
         this.donateButton = new FlatButtonWidget(donateButtonDim, donationText, this::openDonationPage);
-        this.hideDonateButton = new FlatButtonWidget(hideDonateButtonDim, Text.literal("x"), this::hideDonationButton);
+        this.hideDonateButton = new FlatButtonWidget(hideDonateButtonDim, Text.translatable("x"), this::hideDonationButton);
 
         if (SodiumClientMod.options().notifications.hideDonationButton) {
             this.setDonationButtonVisibility(false);
         }
+
 
         Dim2i searchTextFieldDim;
         if (SodiumClientMod.options().notifications.hideDonationButton) {
@@ -113,6 +113,7 @@ public class SodiumVideoOptionsScreen extends Screen {
         } else {
             searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width() - (tabFrameDim.getLimitX() - donateButtonDim.x()) - 2, 20);
         }
+
 
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
@@ -125,6 +126,7 @@ public class SodiumVideoOptionsScreen extends Screen {
                 shaderPackButtonDim = new Dim2i(tabFrameDim.getLimitX() - size - 10, tabFrameDim.y() - 26, 10 + size, 20);
             }
             searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width() - (tabFrameDim.getLimitX() - shaderPackButtonDim.x()) - 2, 20);
+
             FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, Text.translatable(IrisCompat.getIrisShaderPacksScreenLanguageKey()), () -> this.client.setScreen(IrisCompat.getIrisShaderPacksScreen(this)));
             basicFrameBuilder.addChild(dim -> shaderPackButton);
         }
@@ -205,6 +207,7 @@ public class SodiumVideoOptionsScreen extends Screen {
         }
 
         this.setDonationButtonVisibility(false);
+
 
         this.rebuildUI();
     }

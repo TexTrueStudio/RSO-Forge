@@ -93,6 +93,7 @@ public class OptionPageFrame extends AbstractFrame {
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float delta) {
         ControlElement<?> hoveredElement = this.controlElements.stream()
+                .filter(controlElement -> ((Dim2iExtended) (Object) controlElement.getDimensions()).overlapWith(this.originalDim))
                 .filter(ControlElement::isHovered)
                 .findFirst()
                 .orElse(null);

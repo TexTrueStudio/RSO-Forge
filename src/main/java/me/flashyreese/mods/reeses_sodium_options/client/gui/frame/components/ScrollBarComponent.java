@@ -8,6 +8,7 @@ import net.minecraft.util.math.MathHelper;
 import java.util.function.Consumer;
 
 public class ScrollBarComponent extends AbstractWidget {
+
     protected static final int SCROLL_OFFSET = 6;
 
     protected final Dim2i dim;
@@ -47,9 +48,12 @@ public class ScrollBarComponent extends AbstractWidget {
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float delta) {
         this.drawRectOutline(this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY(), 0xFFAAAAAA);
         this.drawRect(this.scrollThumb.x(), this.scrollThumb.y(), this.scrollThumb.getLimitX(), this.scrollThumb.getLimitY(), 0xFFAAAAAA);
+        /*if (this.isFocused()) {
+            this.drawBorder(this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY());
+        }*/
     }
 
     @Override
