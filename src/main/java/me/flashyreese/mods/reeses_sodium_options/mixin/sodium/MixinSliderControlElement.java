@@ -53,7 +53,6 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
         this.editMode = editMode;
     }
 
-
     @Shadow
     public abstract double getThumbPositionForValue(int value);
 
