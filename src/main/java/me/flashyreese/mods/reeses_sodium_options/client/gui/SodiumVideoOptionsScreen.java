@@ -17,10 +17,10 @@ import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
@@ -60,6 +60,12 @@ public class SodiumVideoOptionsScreen extends Screen {
     public void rebuildUI() {
         this.children.clear();
         this.init();
+    }
+
+    @Override
+    protected void init() {
+        this.frame = this.parentFrameBuilder().build();
+        this.children.add(this.frame);
 
         this.searchTextField.setFocused(!lastSearch.get().trim().isEmpty());
         if (this.searchTextField.isFocused()) {
@@ -67,12 +73,6 @@ public class SodiumVideoOptionsScreen extends Screen {
         } else {
             this.setFocused(this.frame);
         }
-    }
-
-    @Override
-    protected void init() {
-        this.frame = this.parentFrameBuilder().build();
-        this.children.add(this.frame);
     }
 
     protected BasicFrame.Builder parentFrameBuilder() {
@@ -97,9 +97,9 @@ public class SodiumVideoOptionsScreen extends Screen {
         Dim2i donateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 32 - donationTextWidth, tabFrameDim.getOriginY() - 26, 10 + donationTextWidth, 20);
         Dim2i hideDonateButtonDim = new Dim2i(tabFrameDim.getLimitX() - 20, tabFrameDim.getOriginY() - 26, 20, 20);
 
-        this.undoButton = new FlatButtonWidget(undoButtonDim, I18n.translate("sodium.options.buttons.undo"), this::undoChanges);
-        this.applyButton = new FlatButtonWidget(applyButtonDim, I18n.translate("sodium.options.buttons.apply"), this::applyChanges);
-        this.closeButton = new FlatButtonWidget(closeButtonDim, I18n.translate("gui.done"), this::onClose);
+        this.undoButton = new FlatButtonWidget(undoButtonDim, "Undo", this::undoChanges);
+        this.applyButton = new FlatButtonWidget(applyButtonDim, "Apply", this::applyChanges);
+        this.closeButton = new FlatButtonWidget(closeButtonDim, "Close", this::onClose);
 
         this.donateButton = new FlatButtonWidget(donateButtonDim, donationText, this::openDonationPage);
         this.hideDonateButton = new FlatButtonWidget(hideDonateButtonDim, "x", this::hideDonationButton);
@@ -108,12 +108,14 @@ public class SodiumVideoOptionsScreen extends Screen {
             this.setDonationButtonVisibility(false);
         }
 
+
         Dim2i searchTextFieldDim;
         if (SodiumClientMod.options().notifications.hideDonationButton) {
             searchTextFieldDim = new Dim2i(tabFrameDim.getOriginX(), tabFrameDim.getOriginY() - 26, tabFrameDim.getWidth(), 20);
         } else {
             searchTextFieldDim = new Dim2i(tabFrameDim.getOriginX(), tabFrameDim.getOriginY() - 26, tabFrameDim.getWidth() - (tabFrameDim.getLimitX() - donateButtonDim.getOriginX()) - 2, 20);
         }
+
 
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
@@ -129,12 +131,12 @@ public class SodiumVideoOptionsScreen extends Screen {
 
             FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, new TranslatableText(IrisCompat.getIrisShaderPacksScreenLanguageKey()).getString(), () -> this.client.openScreen(IrisCompat.getIrisShaderPacksScreen(this)));
             basicFrameBuilder.addChild(dim -> shaderPackButton);
-
-            this.searchTextField = new SearchTextFieldComponent(searchTextFieldDim, this.pages, tabFrameSelectedTab,
-                    tabFrameScrollBarOffset, optionPageScrollBarOffset, tabFrameDim.getHeight(), this, lastSearch, lastSearchIndex);
-
-            basicFrameBuilder.addChild(dim -> this.searchTextField);
         }
+
+        this.searchTextField = new SearchTextFieldComponent(searchTextFieldDim, this.pages, tabFrameSelectedTab,
+                tabFrameScrollBarOffset, optionPageScrollBarOffset, tabFrameDim.getHeight(), this, lastSearch, lastSearchIndex);
+
+        basicFrameBuilder.addChild(dim -> this.searchTextField);
 
         return basicFrameBuilder;
     }
@@ -207,6 +209,7 @@ public class SodiumVideoOptionsScreen extends Screen {
         }
 
         this.setDonationButtonVisibility(false);
+
 
         this.rebuildUI();
     }

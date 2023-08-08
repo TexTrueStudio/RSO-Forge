@@ -7,7 +7,6 @@ import me.jellysquid.mods.sodium.client.gui.widgets.AbstractWidget;
 import me.jellysquid.mods.sodium.client.gui.widgets.FlatButtonWidget;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.Text;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
