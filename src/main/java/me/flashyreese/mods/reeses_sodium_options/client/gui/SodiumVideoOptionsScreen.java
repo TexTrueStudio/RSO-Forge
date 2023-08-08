@@ -119,8 +119,7 @@ public class SodiumVideoOptionsScreen extends Screen {
 
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
-        if (IrisCompat.isIrisPresent()) { // FabricLoader.getInstance().isModLoaded("iris")) {
-            //int size = this.client.textRenderer.getWidth(new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()));
+        if (IrisCompat.isIrisPresent()) {
             int size = this.client.textRenderer.getWidth(new TranslatableText(IrisCompat.getIrisShaderPacksScreenLanguageKey()));
             Dim2i shaderPackButtonDim;
             if (!SodiumClientMod.options().notifications.hideDonationButton) {
@@ -130,7 +129,6 @@ public class SodiumVideoOptionsScreen extends Screen {
             }
             searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width() - (tabFrameDim.getLimitX() - shaderPackButtonDim.x()) - 2, 20);
 
-            //FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()), () -> this.client.setScreen((Screen) IrisApi.getInstance().openMainIrisScreenObj(this)));
             FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, new TranslatableText(IrisCompat.getIrisShaderPacksScreenLanguageKey()), () -> this.client.setScreen(IrisCompat.getIrisShaderPacksScreen(this)));
             basicFrameBuilder.addChild(dim -> shaderPackButton);
         }
