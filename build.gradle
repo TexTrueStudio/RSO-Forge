@@ -1,14 +1,12 @@
 plugins {
-    id 'org.ajoberstar.grgit' version '5.0.0'
     id 'dev.architectury.loom' version '1.2-SNAPSHOT'
     id 'maven-publish'
-    id 'signing'
 }
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
-version = "${project.mod_version}+mc${project.minecraft_version}"
+version = "${project.mod_version}+LTS${project.lts_version}+rb${project.rubidium_version}+mc${project.minecraft_version}"
 group = project.maven_group
 
 loom {
@@ -35,7 +33,6 @@ dependencies {
     forge "net.minecraftforge:forge:${project.forge_version}"
 
     modImplementation "maven.modrinth:rubidium:${project.rubidium_version}"
-    //modImplementation "maven.modrinth:oculus:${project.oculus_version}"
 }
 
 processResources {

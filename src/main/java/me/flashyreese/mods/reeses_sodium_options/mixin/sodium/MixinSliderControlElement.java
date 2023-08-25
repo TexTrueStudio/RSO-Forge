@@ -84,7 +84,7 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
         double thumbOffset = MathHelper.clamp((double) (this.getIntValue() - this.min) / (double) this.range * (double) sliderWidth, 0.0, sliderWidth);
         double thumbX = (double) sliderX + thumbOffset - 2.0;
         if (this.isFocused() && this.isEditMode()) {
-            this.drawRect(drawContext, (int) (thumbX - 1), sliderY - 1, (int) (thumbX + 5), sliderY + sliderHeight + 1, 0xFFFFFFFF);
+            this.drawRect(thumbX - 1, sliderY - 1, thumbX + 5, sliderY + sliderHeight + 1, 0xFFFFFFFF);
         }
     }
 

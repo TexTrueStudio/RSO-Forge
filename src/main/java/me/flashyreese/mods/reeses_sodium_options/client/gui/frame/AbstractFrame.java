@@ -44,7 +44,8 @@ public abstract class AbstractFrame extends AbstractWidget implements ParentElem
     @Override
     public void render(DrawContext drawContext, int mouseX, int mouseY, float delta) {
         if (this.renderOutline) {
-            this.drawBorder(drawContext, this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY(), 0xFFAAAAAA);
+            //this.drawBorder(drawContext, this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY(), 0xFFAAAAAA);
+            this.drawBorder(this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY());
         }
         for (Drawable drawable : this.drawable) {
             drawable.render(drawContext, mouseX, mouseY, delta);
