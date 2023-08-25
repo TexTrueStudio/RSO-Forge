@@ -1,6 +1,7 @@
 package me.flashyreese.mods.reeses_sodium_options.mixin.sodium;
 
 import me.flashyreese.mods.reeses_sodium_options.client.gui.SliderControlElementExtended;
+import me.flashyreese.mods.reeses_sodium_options.util.ScreenUtils;
 import me.jellysquid.mods.sodium.client.gui.options.Option;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlElement;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatter;
@@ -84,7 +85,7 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
         double thumbOffset = MathHelper.clamp((double) (this.getIntValue() - this.min) / (double) this.range * (double) sliderWidth, 0.0, sliderWidth);
         double thumbX = (double) sliderX + thumbOffset - 2.0;
         if (this.isFocused() && this.isEditMode()) {
-            this.drawRect(thumbX - 1, sliderY - 1, thumbX + 5, sliderY + sliderHeight + 1, 0xFFFFFFFF);
+            ScreenUtils.drawRect(drawContext, (int) (thumbX - 1), sliderY - 1, (int) (thumbX + 5), sliderY + sliderHeight + 1, 0xFFFFFFFF);
         }
     }
 
@@ -93,7 +94,7 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
         if (!isFocused()) return false;
 
         if (keyCode == InputUtil.GLFW_KEY_ENTER) {
-            this.setEditMode(!this.isEditMode());;
+            this.setEditMode(!this.isEditMode());
             return true;
         }
 

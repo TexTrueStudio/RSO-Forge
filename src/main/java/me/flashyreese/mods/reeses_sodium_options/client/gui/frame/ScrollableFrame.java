@@ -2,6 +2,7 @@ package me.flashyreese.mods.reeses_sodium_options.client.gui.frame;
 
 import me.flashyreese.mods.reeses_sodium_options.client.gui.Dim2iExtended;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.frame.components.ScrollBarComponent;
+import me.flashyreese.mods.reeses_sodium_options.util.ScreenUtils;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlElement;
 import me.jellysquid.mods.sodium.client.util.Dim2i;
 import net.minecraft.client.gui.DrawContext;
@@ -118,7 +119,7 @@ public class ScrollableFrame extends AbstractFrame {
     public void render(DrawContext drawContext, int mouseX, int mouseY, float delta) {
         if (this.canScrollHorizontal || this.canScrollVertical) {
             if (this.renderOutline) {
-                this.drawBorder(drawContext, this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY(), 0xFFAAAAAA);
+                ScreenUtils.drawBorder(drawContext, this.dim.x(), this.dim.y(), this.dim.getLimitX(), this.dim.getLimitY(), 0xFFAAAAAA);
             }
             this.applyScissor(this.viewPortDimension.x(), this.viewPortDimension.y(), this.viewPortDimension.width(), this.viewPortDimension.height(), () -> super.render(drawContext, mouseX, mouseY, delta));
         } else {

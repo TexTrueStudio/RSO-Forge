@@ -2,6 +2,7 @@ package me.flashyreese.mods.reeses_sodium_options.client.gui.frame;
 
 import me.flashyreese.mods.reeses_sodium_options.client.gui.Dim2iExtended;
 import me.flashyreese.mods.reeses_sodium_options.client.gui.OptionExtended;
+import me.flashyreese.mods.reeses_sodium_options.util.ScreenUtils;
 import me.jellysquid.mods.sodium.client.gui.options.Option;
 import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
 import me.jellysquid.mods.sodium.client.gui.options.OptionImpact;
@@ -153,8 +154,8 @@ public class OptionPageFrame extends AbstractFrame {
 
         drawContext.getMatrices().push();
         drawContext.getMatrices().translate(0, 0, 90);
-        this.drawRect(drawContext, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
-        this.drawBorder(drawContext, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
+        ScreenUtils.drawRect(drawContext, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xE0000000);
+        ScreenUtils.drawBorder(drawContext, boxX, boxY, boxX + boxWidth, boxY + boxHeight, 0xFF94E4D3);
 
         for (int i = 0; i < tooltip.size(); i++) {
             drawContext.drawText(MinecraftClient.getInstance().textRenderer, tooltip.get(i), boxX + textPadding, boxY + textPadding + (i * 12), 0xFFFFFFFF, true);
