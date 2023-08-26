@@ -1,7 +1,5 @@
 plugins {
     id 'dev.architectury.loom' version '1.2-SNAPSHOT'
-    id 'net.darkhax.curseforgegradle' version '1.+'
-    id "com.modrinth.minotaur" version "2.+"
     id 'maven-publish'
 }
 
@@ -74,42 +72,4 @@ publishing {
     repositories {
 
     }
-}
-
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-
-    projectId = "textrues-rubidium-options"
-    versionNumber = "${project.version}"
-    versionType = "beta"
-    uploadFile = remapJar
-    additionalFiles = [sourcesJar]
-    gameVersions = ["1.20", "1.20.1"]
-    loaders = ["forge", "neoforge"]
-    changelog = "changelog.md"
-    dependencies {
-        required.version "rubidium", "0.6.5"
-        optional.project "rubidium-extra"
-        optional.project "oculus"
-    }
-}
-
-task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
-    apiToken = System.getenv("CURSEFORGE_TOKEN")
-    disableVersionDetection()
-
-    def mainFile = upload(663125, remapJar)
-    mainFile.displayName = "${project.version}"
-    mainFile.releaseType = "beta"
-    mainFile.changelog = file("changelog.md")
-    mainFile.changelogType = "markdown"
-    mainFile.addModLoader("forge", "neoforge")
-    mainFile.addJavaVersion("17", "18")
-    mainFile.addGameVersion("1.20", "1.20.1")
-    mainFile.addRequirement("rubidium")
-    mainFile.addOptional("rubidium-extra")
-    mainFile.addOptional("oculus")
-
-    def sourcesFile = mainFile.withAdditionalFile(sourcesJar)
-    sourcesFile.changelog = file("changelog.md")
 }
