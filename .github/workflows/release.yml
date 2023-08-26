@@ -1,34 +1,61 @@
-name: Release
+name: Publish Release
 
 on: [workflow_dispatch] # Manual trigger
 
-permissions:
-  contents: write
-
 jobs:
-  Build:
+  publish:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: 17
-      - name: Cache
-        uses: actions/cache@v3
+
+      - name: Get previous tag
+        run: echo "previous_tag=$(git rev-parse $(git describe --tags --abbrev=0 --exclude *-dev) 2>/dev/null || echo '')" >> $GITHUB_ENV
+
+      - name: Read value from build.gradle-file
+        id: read_property
+        uses: christian-draeger/read-properties@1.1.1
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-            .gradle
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'build.gradle') }}
-      - uses: gradle/wrapper-validation-action@v1
-      - run: |
-          chmod +x gradlew
-          ./gradlew checkVersion build publish curseforge github modrinth --stacktrace -Porg.gradle.parallel.threads=4
-        env:
-          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          path: './build.gradle'
+          properties: 'version'
+
+      - name: Publish to Modrinth & CurseForge
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: nm57myYP
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          curseforge-id: 663125
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          name: ${{ steps.read_property.outputs.version }}
+          version: ${{ steps.read_property.outputs.version }}
+          changelog-file: changelog.md
+
+          version-type: release
+          loaders: |
+            forge
+            neoforge
+
+          version-resolver: latest
+          game-versions: |
+            [1.20,1.20.1]
+
+          dependencies: |
+            rubidium@0.6.5(required)
+            rubidium-extra(recommended)
+            oculus(recommended)
+
+          java: |
+            17
+            18
