@@ -21,7 +21,7 @@ jobs:
         run: echo "previous_tag=$(git rev-parse $(git describe --tags --abbrev=0 --exclude *-dev) 2>/dev/null || echo '')" >> $GITHUB_ENV
 
       - name: Publish to Modrinth & CurseForge
-        uses: Kir-Antipov/mc-publish@v3.3
+        uses: Kir-Antipov/mc-publish@v3
         with:
           modrinth-id: nm57myYP
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}

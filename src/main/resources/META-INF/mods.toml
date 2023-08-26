@@ -34,3 +34,7 @@ mandatory = true
 versionRange = "[0.6.5,]"
 ordering = "NONE"
 side = "CLIENT"
+
+# Kir-Antipov/mc-publish
+[mc-publish]
+loaders=["forge", "neoforge"]
