@@ -47,7 +47,7 @@ jobs:
             forge
             neoforge
 
-          version-resolver: latest
+          game-version-filter: latest
           game-versions: |
             [1.20,1.20.1]
 
