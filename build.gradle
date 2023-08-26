@@ -34,7 +34,6 @@ dependencies {
     forge "net.minecraftforge:forge:${project.forge_version}"
 
     modImplementation "maven.modrinth:rubidium:${project.rubidium_version}"
-    modImplementation "maven.modrinth:oculus:${project.oculus_version}"
 }
 
 processResources {
