@@ -1,5 +1,7 @@
 plugins {
-    id 'dev.architectury.loom' version '1.0-SNAPSHOT'
+    id 'dev.architectury.loom' version '1.2-SNAPSHOT'
+    id 'net.darkhax.curseforgegradle' version '1.+'
+    id "com.modrinth.minotaur" version "2.+"
     id 'maven-publish'
 }
 
@@ -32,7 +34,6 @@ dependencies {
     forge "net.minecraftforge:forge:${project.forge_version}"
 
     modImplementation "maven.modrinth:rubidium:${project.rubidium_version}"
-    modImplementation "maven.modrinth:oculus:${project.oculus_version}"
 }
 
 processResources {
@@ -71,4 +72,42 @@ publishing {
     repositories {
         // uncomment to publish to the local maven
     }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+
+    projectId = "textrues-rubidium-options"
+    versionNumber = "${project.version}"
+    versionType = "alpha"
+    uploadFile = remapJar
+    additionalFiles = [sourcesJar]
+    gameVersions = ["1.19", "1.19.2"]
+    loaders = ["forge"]
+    changelog = "changelog.md"
+    dependencies {
+        required.version "rubidium", "0.6.5"
+        optional.project "rubidium-extra"
+        optional.project "oculus"
+    }
+}
+
+task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = System.getenv("CURSEFORGE_TOKEN")
+    disableVersionDetection()
+
+    def mainFile = upload(663125, remapJar)
+    mainFile.displayName = "${project.version}"
+    mainFile.releaseType = "alpha"
+    mainFile.changelog = file("changelog.md")
+    mainFile.changelogType = "markdown"
+    mainFile.addModLoader("Forge")
+    mainFile.addJavaVersion("Java 17", "Java 18")
+    mainFile.addGameVersion("1.19", "1.19.2")
+    mainFile.addRequirement("rubidium")
+    mainFile.addOptional("rubidium-extra")
+    mainFile.addOptional("oculus")
+
+    def sourcesFile = mainFile.withAdditionalFile(sourcesJar)
+    sourcesFile.changelog = file("changelog.md")
 }
