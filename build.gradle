@@ -82,7 +82,7 @@ modrinth {
     versionType = "release"
     uploadFile = remapJar
     additionalFiles = [sourcesJar]
-    gameVersions = ["1.19", "1.19.2"]
+    gameVersions = ["1.16.5"]
     loaders = ["forge"]
     changelog = "changelog.md"
     dependencies {
@@ -102,8 +102,8 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.changelog = file("changelog.md")
     mainFile.changelogType = "markdown"
     mainFile.addModLoader("Forge")
-    mainFile.addJavaVersion("Java 17", "Java 18")
-    mainFile.addGameVersion("1.19", "1.19.2")
+    mainFile.addJavaVersion("Java 8")
+    mainFile.addGameVersion("1.16.5")
     mainFile.addRequirement("rubidium")
     mainFile.addOptional("rubidium-extra")
     mainFile.addOptional("oculus")
