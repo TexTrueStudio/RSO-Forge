@@ -103,8 +103,8 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.releaseType = "alpha"
     mainFile.changelog = file("changelog.md")
     mainFile.changelogType = "markdown"
-    mainFile.addModLoader("forge", "neoforge")
-    mainFile.addJavaVersion("17", "18")
+    mainFile.addModLoader("Forge", "NeoForge")
+    mainFile.addJavaVersion("Java 17", "Java 18")
     mainFile.addGameVersion("1.20", "1.20.1")
     mainFile.addRequirement("rubidium")
     mainFile.addOptional("rubidium-extra")
