@@ -100,7 +100,7 @@ public class SodiumVideoOptionsScreen extends Screen {
         this.closeButton = new FlatButtonWidget(closeButtonDim, Text.translatable("gui.done"), this::close);
 
         this.donateButton = new FlatButtonWidget(donateButtonDim, donationText, this::openDonationPage);
-        this.hideDonateButton = new FlatButtonWidget(hideDonateButtonDim, Text.translatable("x"), this::hideDonationButton);
+        this.hideDonateButton = new FlatButtonWidget(hideDonateButtonDim, Text.literal("x"), this::hideDonationButton);
 
         if (SodiumClientMod.options().notifications.hideDonationButton) {
             this.setDonationButtonVisibility(false);
@@ -117,7 +117,8 @@ public class SodiumVideoOptionsScreen extends Screen {
 
         basicFrameBuilder = this.parentBasicFrameBuilder(basicFrameDim, tabFrameDim);
 
-        if (IrisCompat.isIrisPresent()) {
+        if (IrisCompat.isIrisPresent()) { // FabricLoader.getInstance().isModLoaded("iris")) {
+            //int size = this.client.textRenderer.getWidth(new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()));
             int size = this.client.textRenderer.getWidth(Text.translatable(IrisCompat.getIrisShaderPacksScreenLanguageKey()));
             Dim2i shaderPackButtonDim;
             if (!SodiumClientMod.options().notifications.hideDonationButton) {
@@ -127,6 +128,7 @@ public class SodiumVideoOptionsScreen extends Screen {
             }
             searchTextFieldDim = new Dim2i(tabFrameDim.x(), tabFrameDim.y() - 26, tabFrameDim.width() - (tabFrameDim.getLimitX() - shaderPackButtonDim.x()) - 2, 20);
 
+            //FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, new TranslatableText(IrisApi.getInstance().getMainScreenLanguageKey()), () -> this.client.setScreen((Screen) IrisApi.getInstance().openMainIrisScreenObj(this)));
             FlatButtonWidget shaderPackButton = new FlatButtonWidget(shaderPackButtonDim, Text.translatable(IrisCompat.getIrisShaderPacksScreenLanguageKey()), () -> this.client.setScreen(IrisCompat.getIrisShaderPacksScreen(this)));
             basicFrameBuilder.addChild(dim -> shaderPackButton);
         }
