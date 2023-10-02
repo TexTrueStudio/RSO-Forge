@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "me.jellysquid.mods.sodium.client.gui.options.control.SliderControl$Button")
@@ -64,10 +65,10 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
     public abstract double getThumbPositionForValue(int value);
 
     @Shadow
-    protected abstract void setValueFromMouse(double d);
+    public abstract int getIntValue();
 
     @Shadow
-    public abstract int getIntValue();
+    public abstract void setValue(double d);
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     public void postInit(Option<Integer> option, Dim2i dim, int min, int max, int interval, ControlValueFormatter formatter, CallbackInfo ci) {
@@ -86,6 +87,26 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
         if (this.isFocused() && this.isEditMode()) {
             this.drawRect(drawContext, (int) (thumbX - 1), sliderY - 1, (int) (thumbX + 5), sliderY + sliderHeight + 1, 0xFFFFFFFF);
         }
+    }
+
+    @Redirect(method = "renderStandaloneValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/Rect2i;getX()I"))
+    public int rso$renderStandaloneValueSliderBoundsGetX(Rect2i instance) {
+        return this.sliderBounds.getX();
+    }
+
+    @Redirect(method = "renderStandaloneValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/Rect2i;getY()I"))
+    public int renderStandaloneValueSliderBoundsGetY(Rect2i instance) {
+        return this.sliderBounds.getY();
+    }
+
+    @Redirect(method = "renderSlider", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/Rect2i;getX()I"))
+    public int rso$renderSliderSliderBoundsGetX(Rect2i instance) {
+        return this.sliderBounds.getX();
+    }
+
+    @Redirect(method = "renderSlider", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/Rect2i;getY()I"))
+    public int rso$renderSliderSliderBoundsGetY(Rect2i instance) {
+        return this.sliderBounds.getY();
     }
 
     @Override
@@ -108,6 +129,17 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
         }
 
         return false;
+    }
+
+    @Inject(method = "setValueFromMouse", at = @At(value = "HEAD"), cancellable = true, remap = false) // fixme: insanity part 3
+    public void rso$setValueFromMouse(double d, CallbackInfo ci) {
+        this.setValue((d - (double)this.sliderBounds.getX()) / (double)this.sliderBounds.getWidth());
+        ci.cancel();
+    }
+
+    @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/Rect2i;contains(II)Z"))
+    public boolean rso$mouseClicked(Rect2i instance, int x, int y) {
+        return this.sliderBounds.contains(x, y);
     }
 
     private void setValueFromMouseScroll(double amount) {
