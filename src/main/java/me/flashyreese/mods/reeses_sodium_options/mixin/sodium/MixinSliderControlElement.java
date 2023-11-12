@@ -63,8 +63,7 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
     @Shadow
     public abstract int getIntValue();
 
-    @Shadow
-    public abstract void setValue(double d);
+    @Shadow public abstract void setValue(double d);
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     public void postInit(Option<Integer> option, Dim2i dim, int min, int max, int interval, ControlValueFormatter formatter, CallbackInfo ci) {
@@ -115,7 +114,7 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
         if (!isFocused()) return false;
 
         if (keyCode == InputUtil.GLFW_KEY_ENTER) {
-            this.setEditMode(!this.isEditMode());
+            this.setEditMode(!this.isEditMode());;
             return true;
         }
 
@@ -154,7 +153,7 @@ public abstract class MixinSliderControlElement extends ControlElement<Integer> 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
         if (this.option.isAvailable() && this.getSliderBounds().containsCursor(mouseX, mouseY) && Screen.hasShiftDown()) {
-            this.setValueFromMouseScroll(amount);
+            this.setValueFromMouseScroll(amount); // todo: horizontal separation
 
             return true;
         }

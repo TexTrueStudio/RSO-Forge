@@ -97,7 +97,6 @@ public class TabFrame extends AbstractFrame {
         }
 
         super.buildFrame();
-
         this.registerFocusListener(element -> {
             if (element instanceof FlatButtonWidgetExtended flatButtonWidget && this.tabSectionCanScroll) {
                 Dim2i dim = flatButtonWidget.getDimensions();

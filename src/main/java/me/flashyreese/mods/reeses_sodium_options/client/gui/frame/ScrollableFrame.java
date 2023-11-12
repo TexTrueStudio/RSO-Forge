@@ -172,8 +172,6 @@ public class ScrollableFrame extends AbstractFrame {
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         return super.mouseReleased(mouseX, mouseY, button) || (this.canScrollHorizontal && this.horizontalScrollBar.mouseReleased(mouseX, mouseY, button)) || (this.canScrollVertical && this.verticalScrollBar.mouseReleased(mouseX, mouseY, button));
     }
-
-    @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
         return super.mouseScrolled(mouseX, mouseY, amount) || (this.canScrollHorizontal && this.horizontalScrollBar.mouseScrolled(mouseX, mouseY, amount)) || (this.canScrollVertical && this.verticalScrollBar.mouseScrolled(mouseX, mouseY, amount));
     }
