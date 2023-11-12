@@ -86,9 +86,9 @@ modrinth {
     additionalFiles = [sourcesJar]
     gameVersions = ["1.20", "1.20.1"]
     loaders = ["forge", "neoforge"]
-    changelog = "changelog.md"
+    changelog = file("changelog.md").getText("UTF-8")
     dependencies {
-        required.version "rubidium", "0.7.0"
+        required.version "rubidium", "0.7.1"
         optional.project "rubidium-extra"
         optional.project "oculus"
     }
