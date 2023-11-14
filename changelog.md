@@ -1,2 +1,2 @@
 ## Change
-- Sync to 0.6.5
+- Sync RSO 0.6.5
